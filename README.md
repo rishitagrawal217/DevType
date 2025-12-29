@@ -17,7 +17,7 @@ docs/images/
 Then reference them like:
 
 ```md
-![Typing Test](docs/images/typing-test.png)
+![Typing Test](./docs/images/typing-test.png)
 ![Typing Test Result](docs/images/typing-test-result.png)
 ![Room Creation](docs/images/room-creation.png)
 ![Multiplayer Competition](docs/images/multiplayer-competition.png)
