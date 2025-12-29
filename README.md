@@ -2,33 +2,6 @@
 
 DevType is a code-based typing test with a **multiplayer mode** where people can join a room, ready up, and race on the same code snippet while watching **live ranked progress bars** update in real time.
 
-## Demo / Screenshots
-
-Add screenshots or a short GIF here (recommended).
-
-```text
-docs/images/
-  typing-test.png
-  typing-test-result.png
-  room-creation.png
-  multiplayer-competition.png
-```
-
-Then reference them like:
-
-```md
-![Typing Test](../docs/images/typing-test.png)
-![Typing Test Result](docs/images/typing-test-result.png)
-![Room Creation](docs/images/room-creation.png)
-![Multiplayer Competition](docs/images/multiplayer-competition.png)
-```
-
-Optional (control width):
-
-```html
-<img src="docs/images/multiplayer-competition.png" width="900" />
-```
-
 ## Features
 - **Single-player** typing test (WPM, accuracy, results)
 - **Multiplayer rooms** (create/join/leave)
@@ -53,8 +26,8 @@ devtype/
 ## Quick Start (Local)
 
 ### 1) Requirements
-- Node.js (LTS recommended)
-- MongoDB connection string (MongoDB Atlas works)
+- Node.js
+- MongoDB connection string 
 
 ### 2) Backend
 
@@ -93,7 +66,7 @@ npm start
 Frontend: `http://localhost:3000`
 
 ## Multiplayer (How to Play)
-1. Login with 2 users (two browsers / incognito works best)
+1. Login with 2 or more users 
 2. Open **Multiplayer**, create a room
 3. Join the same room from the second user
 4. Both click **Ready Up**
