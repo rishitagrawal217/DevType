@@ -1,6 +1,6 @@
-# DevType — Multiplayer Coding Typing Racer
+# DevType - Test your coding speed! 
 
-DevType is a developer-focused typing test with a **multiplayer “TypeRacer-style” mode**: join a room, ready up, start on a synchronized countdown, and race on the same code snippet while watching **live ranked progress bars** update in real time.
+DevType is a code-based typing test with a **multiplayer mode** where people can join a room, ready up, and race on the same code snippet while watching **live ranked progress bars** update in real time.
 
 ## Demo / Screenshots
 
