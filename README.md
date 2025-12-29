@@ -1,46 +1,142 @@
-# Getting Started with Create React App
+# DevType — Multiplayer Coding Typing Racer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+DevType is a developer-focused typing test with a **multiplayer “TypeRacer-style” mode**: join a room, ready up, start on a synchronized countdown, and race on the same code snippet while watching **live ranked progress bars** update in real time.
 
-## Available Scripts
+## Demo / Screenshots
 
-In the project directory, you can run:
+Add screenshots or a short GIF here (recommended).
 
-### `npm start`
+```text
+docs/images/
+  typing-test.png
+  typing-test-result.png
+  room-creation.png
+  multiplayer-competition.png
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Then reference them like:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```md
+![Typing Test](docs/images/typing-test.png)
+![Typing Test Result](docs/images/typing-test-result.png)
+![Room Creation](docs/images/room-creation.png)
+![Multiplayer Competition](docs/images/multiplayer-competition.png)
+```
 
-### `npm test`
+Optional (control width):
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```html
+<img src="docs/images/multiplayer-competition.png" width="900" />
+```
 
-### `npm run build`
+## Features
+- **Single-player** typing test (WPM, accuracy, results)
+- **Multiplayer rooms** (create/join/leave)
+- **Ready-up lobby** + synchronized countdown start
+- **Live race UI** with ranked progress bars (finish-first wins)
+- **Real-time updates** via Socket.io
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tech Stack
+- **Frontend**: React + TypeScript (Create React App)
+- **Backend**: Node.js + Express
+- **Real-time**: Socket.io
+- **Database**: MongoDB + Mongoose
+- **Auth**: JWT
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Project Structure
+```text
+devtype/
+  src/            # React app
+  server/         # Express + Socket.io backend
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Quick Start (Local)
 
-### `npm run eject`
+### 1) Requirements
+- Node.js (LTS recommended)
+- MongoDB connection string (MongoDB Atlas works)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 2) Backend
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Create `server/.env` (copy `server/.env.example`):
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+MONGODB_URI=YOUR_MONGODB_URI
+JWT_SECRET=YOUR_JWT_SECRET
+PORT=4000
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Run the server:
 
-## Learn More
+```bash
+npm install --prefix server
+npm run dev --prefix server
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Backend: `http://localhost:4000`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 3) Frontend
+
+Create `.env` in repo root (optional; copy `.env.example`):
+
+```bash
+REACT_APP_API_BASE=http://localhost:4000
+```
+
+Run the client:
+
+```bash
+npm install
+npm start
+```
+
+Frontend: `http://localhost:3000`
+
+## Multiplayer (How to Play)
+1. Login with 2 users (two browsers / incognito works best)
+2. Open **Multiplayer**, create a room
+3. Join the same room from the second user
+4. Both click **Ready Up**
+5. Countdown starts automatically (3…2…1)
+6. Race: the first player to complete ranks #1 and is shown as the winner
+
+## Environment Variables
+
+### Backend (`server/.env`)
+- `MONGODB_URI` (required)
+- `JWT_SECRET` (required)
+- `PORT` (optional, defaults to `4000`)
+
+### Frontend (`.env`)
+- `REACT_APP_API_BASE` (optional, defaults to `http://localhost:4000`)
+
+## API (Backend)
+
+Auth:
+- `POST /api/auth/register` → `{ username, password }` → `{ token }`
+- `POST /api/auth/login` → `{ username, password }` → `{ token }`
+
+Rooms:
+- `GET /api/rooms`
+- `POST /api/rooms`
+- `POST /api/rooms/:roomId/join`
+- `POST /api/rooms/:roomId/leave`
+- `POST /api/rooms/:roomId/ready` → `{ ready: boolean }`
+
+Scores:
+- `POST /api/scores`
+- `GET /api/scores`
+- `GET /api/scores/avg`
+
+## Real-time Events (Socket.io)
+- `join-room` / `leave-room`
+- `room-updated`
+- `competition-starting` / `competition-countdown` / `competition-started`
+- `participant-progress`
+- `competition-finished`
+
+## Troubleshooting
+- If ports are busy:
+  - Frontend: `3000`
+  - Backend: `4000`
+- Ensure MongoDB is reachable and your `.env` values are correct.
